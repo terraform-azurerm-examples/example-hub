@@ -1,0 +1,39 @@
+resource "azurerm_key_vault" "hub" {
+  name                = "${substr("${var.hub}-keyvault", 0, 13)}-${random_string.hub.result}"
+  resource_group_name = azurerm_resource_group.hub.name
+  location            = azurerm_resource_group.hub.location
+  tags                = azurerm_resource_group.hub.tags
+  tenant_id           = var.tenant_id
+
+  sku_name                        = "standard"
+  enabled_for_deployment          = false
+  enabled_for_template_deployment = false
+  enabled_for_disk_encryption     = false
+
+}
+
+resource "azurerm_key_vault_access_policy" "service_principal" {
+  key_vault_id = azurerm_key_vault.hub.id
+
+  tenant_id = var.tenant_id
+  object_id = data.azurerm_client_config.current.object_id
+
+  key_permissions = [
+    "Create",
+    "Get",
+    "List",
+    "Update",
+    "Delete",
+  ]
+
+  secret_permissions = [
+    "Get",
+    "List",
+    "Set",
+    "Delete"
+  ]
+}
+
+output "key_vault" {
+  value = azurerm_key_vault.hub
+}
