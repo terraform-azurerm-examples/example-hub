@@ -1,5 +1,6 @@
 resource "azurerm_key_vault" "hub" {
-  name                = "${substr("${var.hub}-keyvault", 0, 13)}-${random_string.hub.result}"
+  name = substr(replace("${var.hub}-${random_string.hub.result}", "/[^0-9A-Za-z\\-]+/", ""), 0, 24) // 3-24 lowercase alnum only
+
   resource_group_name = azurerm_resource_group.hub.name
   location            = azurerm_resource_group.hub.location
   tags                = azurerm_resource_group.hub.tags

@@ -1,5 +1,7 @@
 provider "azurerm" {
-  version = "~> 2.11.0"
+  version             = "~> 2.12.0"
+  storage_use_azuread = true
+
   features {}
 
   tenant_id       = var.tenant_id
