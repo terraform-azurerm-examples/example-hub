@@ -1,2 +1,3 @@
-# connect-test
-Test area for terraform config for Connect application
+# terraform-example-hub
+
+Test area for example Terraform hub
