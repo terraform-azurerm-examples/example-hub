@@ -23,7 +23,7 @@ locals {
 }
 
 module "jumpbox" {
-  source   = "../../modules/terraform-azurerm-linux-vm/"
+  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.1"
   defaults = local.vm_defaults
 
   name            = "jumpbox"
@@ -32,14 +32,14 @@ module "jumpbox" {
 
 
 module "testbed_set" {
-  source   = "../../modules/terraform-azurerm-set"
+  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-set?ref=v0.1"
   defaults = local.set_defaults
 
   name = "testbed"
 }
 
 module "testbed" {
-  source   = "../../modules/terraform-azurerm-linux-vm/"
+  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.1"
   defaults = local.vm_defaults
 
   module_depends_on = [module.testbed_set]
@@ -51,7 +51,7 @@ module "testbed" {
 }
 
 module "minimalargs" {
-  source              = "../../modules/terraform-azurerm-linux-vm/"
+  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.1"
   resource_group_name = azurerm_resource_group.hub.name
 
   name                 = "minimalargs"
