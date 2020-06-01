@@ -32,7 +32,7 @@ module "jumpbox" {
 
 
 module "testbed_set" {
-  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-set?ref=v0.1"
+  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-set?ref=v0.1"
   defaults = local.set_defaults
 
   name = "testbed"

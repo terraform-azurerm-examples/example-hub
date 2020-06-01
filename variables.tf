@@ -7,10 +7,6 @@ variable "hub" {
   default     = "hub"
 }
 
-variable "prefix" {
-  type    = string
-  default = "hub"
-}
 
 variable "hub_vnet_address_space" {
   description = "List of address spaces for the virtual network. One /24 address space is expected."
