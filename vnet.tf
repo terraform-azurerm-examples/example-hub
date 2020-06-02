@@ -40,3 +40,7 @@ resource "azurerm_subnet" "GatewaySubnet" {
   virtual_network_name = azurerm_virtual_network.hub.name
   address_prefixes     = [cidrsubnet(azurerm_virtual_network.hub.address_space[0], 3, 7)]
 }
+
+output "vnet" {
+  value = azurerm_virtual_network.hub
+}
