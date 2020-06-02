@@ -51,7 +51,7 @@ module "testbed" {
 }
 
 module "minimalargs" {
-  source   = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.1"
+  source              = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.1"
   resource_group_name = azurerm_resource_group.hub.name
 
   name                 = "minimalargs"
