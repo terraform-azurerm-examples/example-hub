@@ -1,6 +1,6 @@
 provider "azurerm" {
   version             = "~> 2.12.0"
-  storage_use_azuread = true
+  storage_use_azuread = true // export ARM_STORAGE_USE_AZUREAD=true
 
   features {}
 

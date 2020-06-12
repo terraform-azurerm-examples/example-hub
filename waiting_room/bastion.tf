@@ -4,8 +4,8 @@ resource "azurerm_public_ip" "bastion" {
   location            = azurerm_resource_group.hub.location
   tags                = azurerm_resource_group.hub.tags
 
-  allocation_method   = "Static"
-  sku                 = "Standard"
+  allocation_method = "Static"
+  sku               = "Standard"
 }
 
 resource "azurerm_bastion_host" "bastion" {

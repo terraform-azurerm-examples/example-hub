@@ -1,5 +1,5 @@
 resource "azurerm_recovery_services_vault" "hub" {
-  name                = "${var.hub}-recovery-vault"
+  name                = "${var.hub}-${random_string.hub.result}"
   resource_group_name = azurerm_resource_group.hub.name
   location            = azurerm_resource_group.hub.location
   tags                = azurerm_resource_group.hub.tags
