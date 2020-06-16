@@ -7,7 +7,6 @@ variable "hub" {
   default     = "hub"
 }
 
-
 variable "hub_vnet_address_space" {
   description = "List of address spaces for the virtual network. One /24 address space is expected."
   type        = list(string)
@@ -19,6 +18,33 @@ variable "dns_servers" {
   type        = list(string)
   default     = null
 }
+
+// -----------------------------------------------------------
+
+variable "vpn_client" {
+  description = "Boolean to control creation of vpn_client_configuration block."
+  type        = bool
+  default     = false
+}
+
+variable "vpn_client_address_space" {
+  description = "List of address spaces for the vpn client."
+  type        = list(string)
+  default     = ["192.168.76.0/24"]
+}
+
+variable "vpn_client_cert" {
+  description = "Base 64 encoded X.509 PEM cert."
+  type        = string
+  default     = "base64_x509_caCert.pem"
+}
+
+variable "vpn_client_cert_name" {
+  description = "Description for the root cert."
+  type        = string
+  default     = "SelfSignedCertificate"
+}
+
 
 // -----------------------------------------------------------
 
