@@ -1,4 +1,3 @@
-
 provider "azurerm" {
   // Uses the Azure CLI token (or env vars) unless managed identity is used
   features {}
@@ -6,8 +5,15 @@ provider "azurerm" {
   use_msi = false
 }
 
+data "azurerm_key_vault_secret" "client_id" {
+  provider     = azurerm.backend
+  key_vault_id = "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform/providers/Microsoft.KeyVault/vaults/terraformo7odvr3icext3gp"
+  name         = "client-id"
+}
+
+
 data "azurerm_key_vault_secret" "client_secret" {
   provider     = azurerm.backend
-  key_vault_id = "/subscriptions/2d31be49-d959-4415-bb65-8aec2c90ba62/resourceGroups/terraform/providers/Microsoft.KeyVault/vaults/terraformsx80gl24bpp83fh"
+  key_vault_id = "/subscriptions/2ca40be1-7e80-4f2b-92f7-06b2123a68cc/resourceGroups/terraform/providers/Microsoft.KeyVault/vaults/terraformo7odvr3icext3gp"
   name         = "client-secret"
 }

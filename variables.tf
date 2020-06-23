@@ -58,16 +58,16 @@ variable "subscription_id" {
   type        = string
 }
 
-variable "client_id" {
-  description = "The application id for the service principal."
-  type        = string
-}
-
-variable "client_secret" {
-  type        = string
-  description = "The password for the service principal."
-  default     = ""
-}
+// variable "client_id" {
+//   description = "The application id for the service principal."
+//   type        = string
+// }
+//
+// variable "client_secret" {
+//   type        = string
+//   description = "The password for the service principal."
+//   default     = ""
+// }
 
 variable "location" {
   default = "West Europe"
