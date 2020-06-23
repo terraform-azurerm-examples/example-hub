@@ -94,7 +94,7 @@ variable "vpn_client_cert_name" {
 
     Example output
 
-    ```json
+    ```terraform
     {
       "address_space" = [
         "192.168.76.0/24",
