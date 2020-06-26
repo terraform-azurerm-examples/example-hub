@@ -46,6 +46,8 @@ This should be a one off task per site. If you have access to a proper cert then
 
 You will need to retain the caCert.pem, caKey.pem and base64_x509_caCert.pem files.
 
+An example .pem file is included in the repo for comparison, or for test/dev use.
+
 ## Update Terraform config
 
 This config has four variables for the vpn_client_configuration block. All are defaulted:

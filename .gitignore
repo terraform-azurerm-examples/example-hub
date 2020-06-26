@@ -1,4 +1,4 @@
 .terraform*
 terraform.tfstate*
 terraform.tfvars
-terraform.tfvars
+base64_x509_caCert.pem

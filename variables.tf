@@ -1,5 +1,11 @@
 // Note that some of the .tf files also have variable and output blocks to make them individually complete
 
+/*
+variable "subscription_id" {
+  description = "The subscription guid."
+  type        = string
+}
+*/
 
 variable "hub" {
   type        = string
@@ -47,27 +53,6 @@ variable "vpn_client_cert_name" {
 
 
 // -----------------------------------------------------------
-
-variable "tenant_id" {
-  description = "The AAD tenant guid."
-  type        = string
-}
-
-variable "subscription_id" {
-  description = "The subscription guid."
-  type        = string
-}
-
-// variable "client_id" {
-//   description = "The application id for the service principal."
-//   type        = string
-// }
-//
-// variable "client_secret" {
-//   type        = string
-//   description = "The password for the service principal."
-//   default     = ""
-// }
 
 variable "location" {
   default = "West Europe"
