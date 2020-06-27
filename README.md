@@ -1,4 +1,4 @@
-# terraform-example-hub
+# example-hub
 
 This is an example Terraform config creating a hub in a hub and spoke topology. As an example repo for learning purposed then you are encouraged to copy any of the Terraform from it, or fork it and make your own changes.
 
@@ -15,7 +15,7 @@ One example usage once you've cloned the repo:
 * `terraform plan`
 * `terraform apply`
 
-The resources will be created in a single resource group called test-hub.
+The resources will be created in a single resource group called example-hub.
 
 Read the full readme for more information and options.
 
