@@ -8,7 +8,10 @@ It is a work in progress and may be updated at any point. It will be used for a 
 
 One example usage once you've cloned the repo:
 
-* [Optional] Copy the bootstrap output files from the storage account created by [terraform-bootstrap](https://github.com/terraform-azurerm-modules/terraform-bootstrap)
+* [Optional] Bootstrap
+  * Preview the bootstrap_README.md in the storage account created by [terraform-bootstrap](https://github.com/terraform-azurerm-modules/terraform-bootstrap)
+  * Download the bootstrap files
+  * Set the key in backend.tf to your Terraform statefile name, e.g. example-hub.tfstate
 * `mv terraform.tfvars.example terraform.tfvars` and edit
 * `terraform init`
 * `terraform validate`
@@ -19,13 +22,17 @@ The resources will be created in a single resource group called example-hub.
 
 Read the full readme for more information and options.
 
+## Role Based Access Control
+
+It is assumed that the service principal creating the hub has Contributor role assigned in the subscription.
+
 ## azurerm_provider.tf
 
 By default the azurerm_provider.tf will use your Azure CLI token. Ensure you are logged into the correct [context](docs/context.md).
 
 The file also includes comments if using service principals or managed identities.
 
-Alternatively, look at the terraform-bootstrap repo as this will generate a service principal, remote state storage account and a key vault. It is intended for production environments. It will create outputs you can use:
+Alternatively, look at the terraform-bootstrap repo as this will generate a service principal, remote state storage account and a key vault. It is intended for production environments. It will create outputs you can use in your hub and spoke root modules:
 
 * updated azurerm_provider.tf
 * backend.tf
@@ -150,6 +157,8 @@ Once successfully deployed, explore the example spoke repositories:
 
 * [terraform-example-app](https://github.com/terraform-azurerm-modules/terraform-example-app)
 
+You will need to have a VPN Gateway (or ExpressRoute Gateway) for these spokes to peer successfully as the perring settings expect the hub to have a gateway in the hub's GatewaySubnet.
+
 ## Future
 
 Currently planned:
@@ -161,3 +170,31 @@ Currently planned:
 * Use future updates to the VM and VMSS modules to enable fully configured read only domain controllers
 
 Please use the issues to request enhancements.
+
+## Troubleshooting
+
+### State file name undefined in backend.tf
+
+"ErrorMessage=The requested URI does not represent any resource on the server."
+
+You have downloaded the bootstrap files, but you forgot to set the name for the blob that Terraform will use as it's remote state before you ran `terraform init`.
+
+Edit backend.tf and add a name into the empty string, e.g.:
+
+```terraform
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "terraform"
+    storage_account_name = "terraformue9y2c2t2zeml5q"
+    container_name       = "tfstate"
+    key                  = "example-hub.tfstate"
+  }
+}
+```
+
+The .terraform/terraform.tfstate file is now incorrect. Either
+
+* delete the .terraform folder (if nothing has been created yet then this is safe), or
+* edit the .terraform/terraform.tfstate and set the backend.config.key value to the same as the backend.tf file
+
+You should know be able to run `terraform init` successfully.
