@@ -11,10 +11,10 @@ resource "azurerm_subnet" "SharedServices" {
   name                 = "SharedServices"
   resource_group_name  = azurerm_resource_group.hub.name
   virtual_network_name = azurerm_virtual_network.hub.name
-  address_prefixes     = [
+  address_prefixes = [
     cidrsubnet(azurerm_virtual_network.hub.address_space[0], 2, 0),
-    cidrsubnet(azurerm_virtual_network.hub.address_space[0], 3, 2)
-    ]
+    // cidrsubnet(azurerm_virtual_network.hub.address_space[0], 3, 2)
+  ]
 }
 
 resource "azurerm_subnet" "DomainControllers" {

@@ -66,4 +66,12 @@ variable "tags" {
     env           = string
     enforce       = bool
   })
+  default = {
+    owner         = null
+    business_unit = null
+    costcode      = null
+    downtime      = null
+    env           = null
+    enforce       = null
+  }
 }

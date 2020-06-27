@@ -49,7 +49,7 @@ Current subnets:
 
 | Name  | Address Prefixes |
 | ------------- | ------------- |
-| SharedServices | x.x.x.0/26, x.x.x.64/27 |
+| SharedServices | x.x.x.0/26 |
 | Domain Controllers | x.x.x.96/29  |
 | AzureFirewallSubnet | x.x.x.128/26  |
 | AzureBastionSubnet | x.x.x.192/27  |
@@ -65,7 +65,26 @@ $ terraform console
 172.16.0.96/29
 ```
 
-> The azurerm_subnet resources use the new address prefixes attribute so the assignable space is now more flexible.
+### Multiple Address Prefixes on Subnets
+
+The azurerm_subnet resources use the new address prefixes attribute so the assignable space is now more flexible. By default the config will only permit one element in the array, as per the example.
+
+To use multiple address prefixes you have to enable a feature:
+
+```bash
+az feature register --namespace Microsoft.Network --name AllowMultipleAddress PrefixesOnSubnet
+az feature show     --namespace Microsoft.Network --name AllowMultipleAddress PrefixesOnSubnet
+```
+
+The properties.state will show as pending. Enabling the feature can take several hours.
+
+Once successfully registered, propagate the change:
+
+```bash
+az provider register --namespace Microsoft.Network
+```
+
+You can then uncomment the second element in the SharedService subnet's address_prefixes array and then run terraform apply to test.
 
 ## VPN Gateway
 
@@ -127,7 +146,7 @@ If you accept the default name then it will create id_rsa and id_rsa.pub in ~/.s
 
 ## Spokes
 
-Once deployed, explore the example spoke repositories:
+Once successfully deployed, explore the example spoke repositories:
 
 * [terraform-example-app](https://github.com/terraform-azurerm-modules/terraform-example-app)
 
