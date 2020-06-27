@@ -1,11 +1,10 @@
 // Note that some of the .tf files also have variable and output blocks to make them individually complete
 
-/*
 variable "subscription_id" {
-  description = "The subscription guid."
+  description = "The subscription guid. Recommended when using service principals interactively."
   type        = string
+  default     = ""
 }
-*/
 
 variable "hub" {
   type        = string

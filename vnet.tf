@@ -11,7 +11,10 @@ resource "azurerm_subnet" "SharedServices" {
   name                 = "SharedServices"
   resource_group_name  = azurerm_resource_group.hub.name
   virtual_network_name = azurerm_virtual_network.hub.name
-  address_prefixes     = [cidrsubnet(azurerm_virtual_network.hub.address_space[0], 2, 0)]
+  address_prefixes     = [
+    cidrsubnet(azurerm_virtual_network.hub.address_space[0], 2, 0),
+    cidrsubnet(azurerm_virtual_network.hub.address_space[0], 3, 2)
+    ]
 }
 
 resource "azurerm_subnet" "DomainControllers" {
@@ -19,7 +22,7 @@ resource "azurerm_subnet" "DomainControllers" {
   name                 = "DomainControllers"
   resource_group_name  = azurerm_resource_group.hub.name
   virtual_network_name = azurerm_virtual_network.hub.name
-  address_prefixes     = [cidrsubnet(azurerm_virtual_network.hub.address_space[0], 2, 1)]
+  address_prefixes     = [cidrsubnet(azurerm_virtual_network.hub.address_space[0], 5, 12)]
 }
 
 resource "azurerm_subnet" "AzureFirewallSubnet" {

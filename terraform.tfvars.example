@@ -1,4 +1,4 @@
-tenant_id       = "72f988bf-86f1-41af-91ab-2d7cd011db47"
+// tenant_id       = "72f988bf-86f1-41af-91ab-2d7cd011db47"
 subscription_id = "2ca40be1-7e80-4f2b-92f7-06b2123a68cc"
 
 hub                    = "test-hub"

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The VPN Gateway will build, but needs additional config for Azure Active Directory support as AAD auth is not supported in the Terraform provider today.
+The VPN Gateway will build with the P2S settings in the example terraform.tfvars, but needs additional config for Azure Active Directory support. AAD auth is not supported in the Terraform provider today.
 
 This readme will cover the additional steps required. It assumes you are using Ubuntu.
 
