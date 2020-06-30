@@ -12,6 +12,7 @@ One example usage once you've cloned the repo:
   * Preview the bootstrap_README.md in the storage account created by [terraform-bootstrap](https://github.com/terraform-azurerm-modules/terraform-bootstrap)
   * Download the bootstrap files
   * Set the key in backend.tf to your Terraform statefile name, e.g. example-hub.tfstate
+* [Optional] Move files up from the waiting_room folder into the root
 * `mv terraform.tfvars.example terraform.tfvars` and edit
 * `terraform init`
 * `terraform validate`
