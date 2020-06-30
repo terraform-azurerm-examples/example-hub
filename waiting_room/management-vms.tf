@@ -23,7 +23,7 @@ locals {
 //======================================================
 
 module "jumpbox" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.2.1"
   // source   = "../../../modules/vm"
   defaults = local.vm_defaults
 
@@ -35,7 +35,7 @@ module "jumpbox" {
 //======================================================
 
 module "dc" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.2.1"
   // source   = "../../../modules/vm"
   defaults = local.vm_defaults
 
@@ -48,7 +48,7 @@ module "dc" {
 //======================================================
 
 module "cfgmgmt_lb" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-load-balancer" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-load-balancer?ref=v0.2.1"
   // source   = "../../../modules/lb"
   defaults = local.vm_defaults
 
@@ -68,34 +68,34 @@ module "cfgmgmt_lb" {
 }
 
 module "cfgmgmt" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vm?ref=v0.2.1"
   // source   = "../../../modules/vm"
   defaults = local.vm_defaults
 
-  availability_set_name                  = "cfgmgmt"
-  names                                  = ["cfgmgmt-01", "cfgmgmt-02"]
-  source_image_id                        = data.azurerm_image.ubuntu_18_04.id
-  load_balancer_backend_address_pool_ids = { "cfgmgmt" = module.cfgmgmt_lb.load_balancer_backend_address_pool_id }
+  availability_set_name               = "cfgmgmt"
+  names                               = ["cfgmgmt-01", "cfgmgmt-02"]
+  source_image_id                     = data.azurerm_image.ubuntu_18_04.id
+  load_balancer_backend_address_pools = [module.cfgmgmt_lb.load_balancer_backend_address_pool]
 }
 
 //======================================================
 
 module "testbed_lb" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-load-balancer" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-load-balancer?ref=v0.2.1"
   // source   = "../../../modules/lb"
   defaults = local.vm_defaults
   name     = "testbed"
 }
 
 module "testbed_vmss" {
-  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vmss" #?ref=v0.2"
+  source = "github.com/terraform-azurerm-modules/terraform-azurerm-linux-vmss?ref=v0.2.1"
   // source   = "../../../modules/vmss"
   defaults = local.vm_defaults
 
-  load_balancer_backend_address_pool_ids = [module.testbed_lb.load_balancer_backend_address_pool_id]
   name                                   = "testbed"
   instances                              = 3
   source_image_id                        = data.azurerm_image.ubuntu_18_04.id
+  load_balancer_backend_address_pool_ids = [module.testbed_lb.load_balancer_backend_address_pool.id]
 }
 
 //======================================================
