@@ -203,9 +203,9 @@ You should know be able to run `terraform init` successfully.
 
 Example error message:
 
-    ```text
-    Error: Error waiting for completion of Load Balancer "testbed" (Resource Group "example-hub-management-vms"): Code="Canceled" Message="Operation was canceled." Details=[{"code":"CanceledAndSupersededDueToAnotherOperation","message":"Operation PutLoadBalancerOperation (<guid>) was canceled and superseded by operation InternalOperation (<guid)."}]
-    ```
+```text
+Error: Error waiting for completion of Load Balancer "testbed" (Resource Group "example-hub-management-vms"): Code="Canceled" Message="Operation was canceled." Details=[{"code":"CanceledAndSupersededDueToAnotherOperation","message":"Operation PutLoadBalancerOperation (<guid>) was canceled and superseded by operation InternalOperation (<guid)."}]
+```
 
 Reference to known issue:
 
