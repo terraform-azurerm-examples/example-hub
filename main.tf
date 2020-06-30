@@ -13,3 +13,10 @@ resource "random_string" "hub" {
   lower   = true
   number  = true
 }
+
+resource "azurerm_user_assigned_identity" "hub" {
+  resource_group_name = azurerm_resource_group.hub.name
+  location            = azurerm_resource_group.hub.location
+  tags                = azurerm_resource_group.hub.tags
+  name                = "${var.hub}-${random_string.hub.result}"
+}

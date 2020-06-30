@@ -198,3 +198,19 @@ The .terraform/terraform.tfstate file is now incorrect. Either
 * edit the .terraform/terraform.tfstate and set the backend.config.key value to the same as the backend.tf file
 
 You should know be able to run `terraform init` successfully.
+
+### Terraform destroy fails on Load Balancer
+
+Example error message:
+
+    ```text
+    Error: Error waiting for completion of Load Balancer "testbed" (Resource Group "example-hub-management-vms"): Code="Canceled" Message="Operation was canceled." Details=[{"code":"CanceledAndSupersededDueToAnotherOperation","message":"Operation PutLoadBalancerOperation (<guid>) was canceled and superseded by operation InternalOperation (<guid)."}]
+    ```
+
+Reference to known issue:
+
+* <https://github.com/terraform-providers/terraform-provider-azurerm/issues/5947>
+
+Action:
+
+* Rerun `terraform destroy` to remove remaining resources.
