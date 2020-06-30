@@ -35,6 +35,23 @@ resource "azurerm_key_vault_access_policy" "service_principal" {
   ]
 }
 
+resource "azurerm_key_vault_access_policy" "managed_identity" {
+  key_vault_id = azurerm_key_vault.hub.id
+
+  tenant_id = data.azurerm_client_config.current.tenant_id
+  object_id = azurerm_user_assigned_identity.hub.principal_id
+
+  key_permissions = [
+    "Get",
+    "List",
+  ]
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
+}
+
 output "key_vault" {
   value = azurerm_key_vault.hub
 }
